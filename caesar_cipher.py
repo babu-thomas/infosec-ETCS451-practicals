@@ -24,14 +24,7 @@ def encrypt(text, shift):
 
 
 def decrypt(text, shift):
-    if shift == 0:
-        return text
-
-    def transform(char):
-        first_letter = 'a' if char.islower() else 'A'
-        return chr((ord(char) - ord(first_letter) - shift) % 26 + ord(first_letter))
-
-    return ''.join([transform(char) if char.isalpha() else char for char in text])
+    return encrypt(text, 26 - shift)
 
 
 def main():
