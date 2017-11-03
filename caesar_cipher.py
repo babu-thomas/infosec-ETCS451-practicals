@@ -1,5 +1,17 @@
 # Caesar Cipher encryption and decryption
 
+# usage: python3 caesar_cipher.py [-h] [-d] text shift
+# 
+# positional arguments:
+#   text           the text to be encrypted or decrypted. Encrypts unless --decrypt is passed.
+#   shift          shift value for cipher. Specifies how much to shift
+#                  individual characters of message
+
+# optional arguments:
+#   -h, --help     show this help message and exit
+#   -d, --decrypt  decrypt the given text instead of encrypting
+
+
 def encrypt(text, shift):
     if shift == 0:
         return text
@@ -23,11 +35,23 @@ def decrypt(text, shift):
 
 
 def main():
-    text = 'So Secret. Much Fun. WOW'
-    shift = 2
-    ciphertext = encrypt(text, shift)
-    print(ciphertext)
-    print(decrypt(ciphertext, shift))
+    import argparse
+
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument('text',
+        help='the text to be encrypted or decrypted. Encrypts unless --decrypt is passed')
+    parser.add_argument('shift',
+        help='shift value for cipher. Specifies how much to shift individual characters of message',
+        type = int)
+    parser.add_argument('-d', '--decrypt', help='decrypt the given text instead of encrypting',
+                        action='store_true')
+
+    args = parser.parse_args()
+    if(args.decrypt):
+        print(decrypt(args.text, args.shift))
+    else:
+        print(encrypt(args.text, args.shift))
 
 
 if __name__ == '__main__':
