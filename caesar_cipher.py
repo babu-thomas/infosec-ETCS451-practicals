@@ -1,5 +1,15 @@
 # Caesar Cipher encryption and decryption
 
+# Example usage-
+# Encryption
+# $ python3 caesar_cipher.py 'So Secret. Much Fun. WOW' 3
+# Output-
+# Vr Vhfuhw. Pxfk Ixq. ZRZ
+# Decryption
+# $ python3 caesar_cipher.py -d 'Vr Vhfuhw. Pxfk Ixq. ZRZ' 3
+# Output-
+# So Secret. Much Fun. WOW
+
 # usage: python3 caesar_cipher.py [-h] [-d] text shift
 # 
 # positional arguments:
@@ -10,6 +20,7 @@
 # optional arguments:
 #   -h, --help     show this help message and exit
 #   -d, --decrypt  decrypt the given text instead of encrypting
+#
 
 
 def encrypt(text, shift):
