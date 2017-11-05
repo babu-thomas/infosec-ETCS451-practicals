@@ -16,7 +16,6 @@
 #   text           the text to be encrypted or decrypted. Encrypts unless --decrypt is passed.
 #   shift          shift value for cipher. Specifies how much to shift
 #                  individual characters of message
-
 # optional arguments:
 #   -h, --help     show this help message and exit
 #   -d, --decrypt  decrypt the given text instead of encrypting
