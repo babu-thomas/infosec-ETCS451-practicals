@@ -1,7 +1,7 @@
 # Information Security (ETCS-451) Practicals
 
 - [x] Caesar Cipher
-- [ ] Electronic Codebook Mode (ECB)
+- [x] Electronic Codebook Mode (ECB)
 - [ ] Hill Cipher
 - [ ] RSA
 - [ ] Diffie-Hellman Key Exchange
