@@ -49,7 +49,6 @@ std::string transform(const std::string& message, const std::string& key, int sh
 	print_key_table(key_table);
 
 	std::string plaintext = message.size() % 2 == 0 ? message : message + 'Z';
-	std::cout << "\nPlaintext: " << plaintext << "\n";
 
 	std::string ciphertext = plaintext;
 	for(auto i = 0u; i <= plaintext.size() - 2; i += 2)
