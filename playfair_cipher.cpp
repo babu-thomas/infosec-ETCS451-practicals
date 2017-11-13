@@ -44,8 +44,6 @@ std::string encrypt(const std::string& message, const std::string& key)
 		char letter2 = plaintext[i + 1];
 		std::pair<int, int> letter1_pos = find_pos(letter1, key_table);
 		std::pair<int, int> letter2_pos = find_pos(letter2, key_table);
-		std::cout << letter1 << " pos: " << letter1_pos.first << ", " << letter1_pos.second << "\n";
-		std::cout << letter2 << " pos: " << letter2_pos.first << ", " << letter2_pos.second << "\n";
 		if(in_same_column(letter1_pos, letter2_pos))
 		{
 			ciphertext[i] = key_table[idx(letter1_pos.first + 1, letter1_pos.second)];
@@ -58,8 +56,8 @@ std::string encrypt(const std::string& message, const std::string& key)
 		}
 		else
 		{
-			ciphertext[i] = 'Q';
-			ciphertext[i+1] = 'Q';
+			ciphertext[i] = key_table[idx(letter1_pos.first, letter2_pos.second)];
+			ciphertext[i+1] = key_table[idx(letter2_pos.first, letter1_pos.second)];
 		}
 	}
 	return ciphertext;
