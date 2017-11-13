@@ -6,6 +6,8 @@
 #include <utility>
 
 std::string encrypt(const std::string& message, const std::string& key);
+std::string decrypt(const std::string& message, const std::string& key);
+std::string transform(const std::string& message, const std::string& key, int shift);
 std::array<char, 25> gen_key_table(const std::string& key);
 void print_key_table(const std::array<char, 25>& key_table);
 std::pair<int, int> find_pos(char letter, const std::array<char, 25>& key_table);
@@ -24,11 +26,23 @@ int main()
 
 	std::string ciphertext = encrypt(message, key);
 	std::cout << "Ciphertext: " << ciphertext << "\n";
+	std::cout << "Decrypting..." << "\n";
+	std::cout << "Plaintext: " << decrypt(ciphertext, key) << "\n";
 
 	return 0;
 }
 
 std::string encrypt(const std::string& message, const std::string& key)
+{
+	return transform(message, key, 1);
+}
+
+std::string decrypt(const std::string& message, const std::string& key)
+{
+	return transform(message, key, -1);
+}
+
+std::string transform(const std::string& message, const std::string& key, int shift)
 {
 	std::array<char, 25> key_table = gen_key_table(key);
 	std::cout << "\nKey table: " << "\n";
@@ -46,13 +60,13 @@ std::string encrypt(const std::string& message, const std::string& key)
 		std::pair<int, int> letter2_pos = find_pos(letter2, key_table);
 		if(in_same_column(letter1_pos, letter2_pos))
 		{
-			ciphertext[i] = key_table[idx(letter1_pos.first + 1, letter1_pos.second)];
-			ciphertext[i+1] = key_table[idx(letter2_pos.first + 1, letter2_pos.second)];
+			ciphertext[i] = key_table[idx(letter1_pos.first + shift, letter1_pos.second)];
+			ciphertext[i+1] = key_table[idx(letter2_pos.first + shift, letter2_pos.second)];
 		}
 		else if(in_same_row(letter1_pos, letter2_pos))
 		{
-			ciphertext[i] = key_table[idx(letter1_pos.first, letter1_pos.second + 1)];
-			ciphertext[i+1] = key_table[idx(letter2_pos.first, letter2_pos.second + 1)];
+			ciphertext[i] = key_table[idx(letter1_pos.first, letter1_pos.second + shift)];
+			ciphertext[i+1] = key_table[idx(letter2_pos.first, letter2_pos.second + shift)];
 		}
 		else
 		{
@@ -114,8 +128,30 @@ std::pair<int, int> find_pos(char letter, const std::array<char, 25>& key_table)
 
 int idx(int row, int col)
 {
-	if(row == 5) row = 0;
-	if(col == 5) col = 0;
+	switch(row)
+	{
+	case 5:
+		row = 0;
+		break;
+	case -1:
+		row = 4;
+		break;
+	default:
+		break;
+	}
+
+	switch(col)
+	{
+	case 5:
+		col = 0;
+		break;
+	case -1:
+		col = 4;
+		break;
+	default:
+		break;
+	}
+
 	return row * 5 + col;
 }
 
