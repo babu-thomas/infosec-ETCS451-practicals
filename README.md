@@ -1,5 +1,5 @@
 # Information Security (ETCS-451) Practicals
-
+Click on the links to view program output online at [Ideone](https://ideone.com).
 - [x] Caesar Cipher
 - [x] Electronic Codebook Mode (ECB)
 - [ ] Hill Cipher
@@ -7,4 +7,4 @@
 - [ ] Diffie-Hellman Key Exchange
 - [ ] Monoalphabetic Cipher
 - [ ] Vignere Cipher
-- [ ] Playfair Cipher
+- [ ] Playfair Cipher ([Link](https://ideone.com/UVC3T7))
