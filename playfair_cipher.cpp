@@ -3,21 +3,31 @@
 #include <array>
 #include <unordered_map>
 
+std::string encrypt(const std::string& message, const std::string& key);
 std::array<char, 25> gen_key_table(const std::string& key);
 
 int main()
 {
-	std::string key;
+	std::string message, key;
+	std::cout << "Enter message: ";
+	std::cin >> message;
 	std::cout << "Enter key: ";
 	std::cin >> key;
-
-	std::array<char, 25> key_table = gen_key_table(key);
-	for(auto& i: key_table)
-	{
-		std::cout << i << " ";
-	}
+	
+	std::string ciphertext = encrypt(message, key);
 
 	return 0;
+}
+
+std::string encrypt(const std::string& message, const std::string& key)
+{
+	std::array<char, 25> key_table = gen_key_table(key);
+
+	std::string plaintext = message.size() % 2 == 0 ? message : message + 'Z';
+	std::cout << plaintext;
+
+	std::string ciphertext;
+	return ciphertext;
 }
 
 std::array<char, 25> gen_key_table(const std::string& key)
