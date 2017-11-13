@@ -11,6 +11,8 @@ void print_key_table(const std::array<char, 25>& key_table);
 std::pair<int, int> find_pos(char letter, const std::array<char, 25>& key_table);
 int idx(int row, int col);
 std::pair<int, int> idx(int i);
+bool in_same_column(const std::pair<int, int> pos1, const std::pair<int, int> pos2);
+bool in_same_row(const std::pair<int, int> pos1, const std::pair<int, int> pos2);
 
 int main()
 {
@@ -19,8 +21,9 @@ int main()
 	std::cin >> message;
 	std::cout << "Enter key: ";
 	std::cin >> key;
-	
+
 	std::string ciphertext = encrypt(message, key);
+	std::cout << "Ciphertext: " << ciphertext << "\n";
 
 	return 0;
 }
@@ -43,9 +46,21 @@ std::string encrypt(const std::string& message, const std::string& key)
 		std::pair<int, int> letter2_pos = find_pos(letter2, key_table);
 		std::cout << letter1 << " pos: " << letter1_pos.first << ", " << letter1_pos.second << "\n";
 		std::cout << letter2 << " pos: " << letter2_pos.first << ", " << letter2_pos.second << "\n";
-		// Same column
-		// Same row
-		// Rectangle
+		if(in_same_column(letter1_pos, letter2_pos))
+		{
+			ciphertext[i] = key_table[idx(letter1_pos.first + 1, letter1_pos.second)];
+			ciphertext[i+1] = key_table[idx(letter2_pos.first + 1, letter2_pos.second)];
+		}
+		else if(in_same_row(letter1_pos, letter2_pos))
+		{
+			ciphertext[i] = key_table[idx(letter1_pos.first, letter1_pos.second + 1)];
+			ciphertext[i+1] = key_table[idx(letter2_pos.first, letter2_pos.second + 1)];
+		}
+		else
+		{
+			ciphertext[i] = 'Q';
+			ciphertext[i+1] = 'Q';
+		}
 	}
 	return ciphertext;
 }
@@ -109,4 +124,13 @@ int idx(int row, int col)
 std::pair<int, int> idx(int i)
 {
 	return std::make_pair(i / 5, i % 5);
+}
+
+bool in_same_column(const std::pair<int, int> pos1, const std::pair<int, int> pos2)
+{
+	return pos1.second == pos2.second;
+}
+bool in_same_row(const std::pair<int, int> pos1, const std::pair<int, int> pos2)
+{
+	return pos1.first == pos2.first;
 }
