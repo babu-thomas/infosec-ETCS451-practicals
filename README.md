@@ -7,4 +7,4 @@ Click on the links to view program output online at [Ideone](https://ideone.com)
 - [ ] Diffie-Hellman Key Exchange
 - [ ] Monoalphabetic Cipher
 - [ ] Vignere Cipher
-- [ ] Playfair Cipher ([Link](https://ideone.com/UVC3T7))
+- [x] Playfair Cipher ([Link](https://ideone.com/n6rcGG))
